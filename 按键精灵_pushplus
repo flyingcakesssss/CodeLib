@@ -1,0 +1,10 @@
+//head没写中文支持将就用先，需要填写的内容为：<参数><token>
+
+data_title = "<title>"
+data_content = "<content>"
+data_token="4cb5f0be7125416ca4a76b76a328684d"
+
+data_post = "https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content
+res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+MessageBox res_post
+//可以MB结果 
