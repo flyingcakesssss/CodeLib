@@ -1,71 +1,128 @@
 //Resolution 1920x1080
 
-For turn = 1 To 9999999
-	
-	Call Plugin.Sys.SetCLB("none")
-	
-	IfColor 606, 25, "FDE3D3", 0 Then
-		KeyPress "F11", 1
-		Delay 10000
-	End If
+For turn = 1 To 99999999
 
+    Call Plugin.Sys.SetCLB("none")
+    Click_offline = 0
+
+    IfColor 606, 25, "FDE3D3", 0 Then
+        KeyPress "F11", 1
+        Delay 10000
+    End If
+
+    //1.跳出界面处理
+    //①点击离线奖励
+    
+	Delay 5000 //防止离线奖励被直接跳过
+	
+    IfColor 802,564, "FF997E", 0 Then
+        MoveTo 872, 621
+        LeftClick 1
+        Delay 3000
+        Click_offline = Click_offline + 1
+    End If
+
+    //②关闭每日任务
+
+    IfColor 959,839, "4260F8", 0 Then
+        MoveTo 959,835
+        LeftClick 1
+        Delay 2000
+    End If
+
+    IfColor 1158,568, "FF997E", 0 Then
+        MoveTo 1160,300
+        LeftClick 1
+        MoveTo 1160,332
+        LeftClick 1
+        MoveTo 1160,365
+        LeftClick 1
+        MoveTo 1160,397
+        LeftClick 1
+        MoveTo 1158,431
+        LeftClick 1
+        MoveTo 1157,464
+        LeftClick 1
+        MoveTo 1159,498
+        LeftClick 1
+        MoveTo 1159,531
+        LeftClick 1
+        Delay 2000
+    End If
+    
+    //2.打开My
+
+    IfColor 1064,782, "8DF4FF", 0 Then
+        MoveTo 1095,801
+        LeftClick 1
+        Delay 1000
 		
-	For b = 1 To 20
-		IfColor 802,564, "FF997E", 0 Then	
-			//1.点击离线奖励（循环检测，超时跳过）
-			
-			MoveTo 872, 621
-			LeftClick 1
-			Delay 3000
-		Else 
-			Delay 1000
-		End If
-	Next
-			
-	//2.关闭每日任务
-	
-	MoveTo 959,835
-	LeftClick 1
-	Delay 2000
-	
-	MoveTo 1158,431
-	LeftClick 1
-	Delay 2000
-	
-	//3.打开My
-	
-	MoveTo 1095,801
-	LeftClick 1
-	Delay 1000
-	
-	MoveTo 901,358			
-	LeftDown 1
-	Delay 1000
-	MoveTo 995, 358
-	LeftUp 1
-	Delay 1000
-	
-	KeyDown "Ctrl", 1
-	KeyPress "C", 1
-	KeyUp "Ctrl", 1
-	
-	data_coin = Plugin.Sys.GetCLB()
-	//MessageBox data_coin
-	
-	//head没写中文支持将就用先，需要填写的内容为：<参数><token> 
-	//不为空才post 减少post量
-	IfColor 1062,334, "F09B60", 0 Then
-		If data_coin = "none" Then 
-			Delay 1000
-		Else
-			data_title = "Result"
-			data_content = data_coin
-			data_token="4cb5f0be7125416ca4a76b76a328684d"
-			
-			data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
-			res_post = Plugin.SmHTTP.HTTP_POST(data_post)
-		End If
-	End If
+        
+        //账户名称
+        MoveTo 867,292
+        LeftDown 1
+        Delay 1000
+        MoveTo 1084,293
+        LeftUp 1
+        Delay 1000
+
+        KeyDown "Ctrl", 1
+        KeyPress "C", 1
+        KeyUp "Ctrl", 1
+
+        data_name = Plugin.Sys.GetCLB()
+        TracePrint data_name
+        
+        //Level
+        MoveTo 865,322
+        LeftDown 1
+        Delay 1000
+        MoveTo 1100,327 
+        LeftUp 1
+        Delay 1000
+
+        KeyDown "Ctrl", 1
+        KeyPress "C", 1
+        KeyUp "Ctrl", 1
+
+        data_level = Plugin.Sys.GetCLB()
+        TracePrint data_level
+        
+        //coin数量
+        MoveTo 901,358
+        LeftDown 1
+        Delay 1000
+        MoveTo 995, 358
+        LeftUp 1
+        Delay 1000
+
+        KeyDown "Ctrl", 1
+        KeyPress "C", 1
+        KeyUp "Ctrl", 1
+
+        data_coin = Plugin.Sys.GetCLB()
+        TracePrint data_coin
+        
+        //MessageBox data_coin
+
+        //head没写中文支持将就用先，需要填写的内容为：<参数><token> 
+        //不为空才post 减少post量
+        
+        IfColor 1062,334, "F09B60", 0 Then
+            If data_coin = "none" Then 
+                Delay 1000
+            Else
+                data_title = data_name + "(" + CStr(Click_offline) + ")"
+                data_content = data_level + ":" + data_coin
+                data_token="4cb5f0be7125416ca4a76b76a328684d"
+                data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
+                TracePrint data_post
+                res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+                TracePrint res_post
+            End If
+        End If
+
+    End If
+
+
 Next
-
-
