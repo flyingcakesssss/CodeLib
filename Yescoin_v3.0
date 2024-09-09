@@ -7,13 +7,11 @@ For turn = 1 To 99999999
 
     IfColor 606, 25, "FDE3D3", 0 Then
         KeyPress "F11", 1
-        Delay 10000
+        Delay 5000
     End If
 
     //1.跳出界面处理
     //①点击离线奖励
-    
-	Delay 5000 //防止离线奖励被直接跳过
 	
     IfColor 802,564, "FF997E", 0 Then
         MoveTo 872, 621
@@ -47,12 +45,13 @@ For turn = 1 To 99999999
         LeftClick 1
         MoveTo 1159,531
         LeftClick 1
-        Delay 2000
+        Delay 1000
     End If
     
     //2.打开My
 
-    IfColor 1064,782, "8DF4FF", 0 Then
+    IfColor 1064, 782, "8DF4FF", 0 Then
+    	Delay 8000
         MoveTo 1095,801
         LeftClick 1
         Delay 1000
