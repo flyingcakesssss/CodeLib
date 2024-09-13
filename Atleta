@@ -87,6 +87,8 @@ For turn = 1 To 99999999
     	End If
 	Next
 	
+	Delay 5000
+	
 	MoveTo 392,890
     LeftDown 1
     Delay 1000
