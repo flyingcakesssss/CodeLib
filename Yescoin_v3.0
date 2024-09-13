@@ -6,6 +6,15 @@ For turn = 1 To 99999999
     Click_offline = 0
 
     IfColor 606, 25, "FDE3D3", 0 Then
+        MoveTo 606, 25
+        LeftClick 1
+        KeyPress "F11", 1
+        Delay 5000
+    End If
+    
+    IfColor 615,22, "E9E3DD", 0 Then
+        MoveTo 615,22
+        LeftClick 1
         KeyPress "F11", 1
         Delay 5000
     End If
@@ -51,7 +60,7 @@ For turn = 1 To 99999999
     //2.打开My
 
     IfColor 1064, 782, "8DF4FF", 0 Then
-    	Delay 8000
+    	Delay 2000
         MoveTo 1095,801
         LeftClick 1
         Delay 1000
