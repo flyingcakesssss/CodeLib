@@ -1,1 +1,108 @@
+//Resolution:1920*1080
+//
 
+
+For turn = 1 To 99999999
+
+	//0.初始化，记录账号
+	
+	data_token = "4cb5f0be7125416ca4a76b76a328684d"
+	For turn_wait = 1 to 9999999999
+		IfColor 294,505, "DB16BF", 0 Then
+			MoveTo 500,602
+    		LeftDoubleClick 1
+    		KeyDown "Ctrl", 1
+			KeyPress "C", 1
+			KeyUp "Ctrl", 1
+			Exit For
+    	End If
+    	Delay 1000
+    Next
+	
+	data_acc = Plugin.Sys.GetCLB()
+	
+	MoveTo 500,686
+    LeftClick 1
+    Delay 2000
+    
+    MoveTo 669,176
+    LeftClick 1
+    Delay 2000
+    
+    //1.复制初始ATLA余额
+	MoveTo 392,890
+    LeftDown 1
+    Delay 1000
+    MoveTo 452,885
+    LeftUp 1
+    Delay 1000
+        
+	KeyDown "Ctrl", 1
+    KeyPress "C", 1
+    KeyUp "Ctrl", 1
+
+    data_ori = Plugin.Sys.GetCLB()
+    
+    //2.质押
+    
+    MoveTo 508,779
+    LeftClick 1
+    Delay 2000
+    
+    MoveTo 348,643
+    LeftClick 1
+    Delay 2000
+
+	KeyPress "8", 1
+
+	MoveTo 490,809
+    LeftClick 1
+    Delay 2000
+    
+    MoveTo 268,730
+    LeftClick 1
+    Delay 2000
+    
+    MoveTo 477,782
+    LeftClick 1
+    Delay 2000
+	
+	For turn_a = 1 To 20
+		IfColor 1182,766, "0D0D0D", 0 Then
+			MoveTo 1182,766
+    		LeftClick 1
+    		Exit For
+    	End If
+		Delay 1000
+	Next
+	
+	//3.复制最终ATLA余额
+	
+	
+	For turn_b = 1 To 60
+		IfColor 711,598, "F0F0F0", 0 Then
+			Delay 3000
+		Else 
+			Exit For
+    	End If
+	Next
+	
+	MoveTo 392,890
+    LeftDown 1
+    Delay 1000
+    MoveTo 452,885
+    LeftUp 1
+    Delay 1000
+        
+	KeyDown "Ctrl", 1
+    KeyPress "C", 1
+    KeyUp "Ctrl", 1
+
+    data_fin = Plugin.Sys.GetCLB()
+	
+	//4.发送消息
+    data_title = data_acc
+    data_content = data_ori + "to" + data_fin
+    data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
+    res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+Next
