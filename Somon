@@ -1,0 +1,56 @@
+//Resolution:1920*1080
+//NST aimed page:https://m.social.monster/task
+
+
+For turn = 1 To 99999999
+
+	//0.初始化
+	data_token = "4cb5f0be7125416ca4a76b76a328684d"
+	Res_checkin = 0
+	Call Plugin.Sys.SetCLB("none")
+	
+	//1.监听&Checkin
+	For turn_wait = 1 to 9999999999
+		IfColor 681,928, "45F3FF", 0 Then
+			MoveTo 694,947
+    		LeftClick 1
+    		
+    		Delay 2000
+    		IfColor 681,928, "0A0A0A", 0 Then
+    			Res_checkin = Res_checkin + 1
+    		End If
+    		
+			Exit For
+    	End If
+    Next
+    
+    Delay 3000
+    
+    //2.查看ID
+    
+    MoveTo 69,896
+    LeftClick 1
+    Delay 1000
+    
+    MoveTo 37,247
+    LeftDown 1
+    Delay 1000
+    MoveTo 139,248
+    LeftUp 1
+    Delay 1000
+    
+    Delay 2000
+        
+	KeyDown "Ctrl", 1
+    KeyPress "C", 1
+    KeyUp "Ctrl", 1
+
+    data_acc = Plugin.Sys.GetCLB()
+	
+	
+	//3.发送消息
+    data_title = data_acc
+    data_content = CStr(Res_checkin)
+    data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
+    res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+Next
