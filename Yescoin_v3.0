@@ -32,24 +32,40 @@ For turn = 1 To 99999999
     //②关闭每日任务
 
     IfColor 959,374, "FFC374", 0 Then
+        MoveTo 958,815
+        LeftClick 1
         MoveTo 955,755
         LeftClick 1
         Delay 2000
     End If
     
+    IfColor 962,404, "FFC374", 0 Then
+        MoveTo 958,815
+        LeftClick 1
+        MoveTo 961,725
+        LeftClick 1
+        Delay 2000
+    End If
+    
+    IfColor 948,298, "FFC374", 0 Then
+        MoveTo 957,826
+        LeftClick 1
+        Delay 2000
+    End If
+    
     //2.打开My
-	IfColor 1078, 852, "8585FF", 0 Then //防止每日任务未加载
+	IfColor 768,801, "FFC676", 0 Then //防止每日任务未加载
 		Delay 3000
 		
-    	IfColor 1064, 782, "8DF4FF", 0 Then
-    		Delay 2000
-        	MoveTo 1095,801
+    	IfColor 1157,800, "FFC676", 0 Then
+        	MoveTo 1086,796
         	LeftClick 1
-        	Delay 1000
+        	Delay 3000
 			
         	
         	//账户名称
-        	MoveTo 867,292
+        	MoveTo 867,293
+        	Delay 1000
         	LeftDown 1
         	Delay 1000
         	MoveTo 1084,293
@@ -64,10 +80,10 @@ For turn = 1 To 99999999
         	TracePrint data_name
         	
         	//Level
-        	MoveTo 865,322
+        	MoveTo 865,320
         	LeftDown 1
         	Delay 1000
-        	MoveTo 1100,327 
+        	MoveTo 1100,320 
         	LeftUp 1
         	Delay 1000
 	
@@ -79,10 +95,10 @@ For turn = 1 To 99999999
         	TracePrint data_level
         	
         	//coin数量
-        	MoveTo 901,358
+        	MoveTo 901,360
         	LeftDown 1
         	Delay 1000
-        	MoveTo 995, 358
+        	MoveTo 995, 360
         	LeftUp 1
         	Delay 1000
 	
