@@ -1,5 +1,6 @@
 //Resolution:1920*1080
 //NST aimed page:https://m.social.monster/task
+//v1.1
 
 
 For turn = 1 To 99999999
@@ -9,33 +10,49 @@ For turn = 1 To 99999999
 	Res_checkin = 0
 	Call Plugin.Sys.SetCLB("none")
 	
-	//1.监听&Checkin
+	//1.监听&Checkin  Res_checkin = 0 (fault) 1 (done) 2 (had been done)"45F3FF"
 	For turn_wait = 1 to 9999999999
-		IfColor 681,928, "45F3FF", 0 Then
-			MoveTo 694,947
-    		LeftClick 1
+		IfColor 455,172, "46F3FF", 0 Then
+			Delay 2000
+			
+			IfColor 722,948, "45F3FF", 0 Then //检查是否已完成
+    			Res_checkin = 2
+    		End If
+			
+			IfColor 681,928, "45F3FF", 0 Then //检查未完成+完成后检查颜色
+    			MoveTo 694,947
+    			LeftClick 1
+    			Delay 1000
+    			MoveTo 506,671
+    			LeftClick 1
+    			Delay 1000
+    			IfColor 681,928, "0A0A0A", 0 Then
+    			Res_checkin = 1
+    			End If
+    		End If
     		
     		Delay 2000
-    		IfColor 681,928, "0A0A0A", 0 Then
-    			Res_checkin = Res_checkin + 1
-    		End If
     		
 			Exit For
     	End If
     Next
     
-    Delay 3000
+    Delay 2000
     
     //2.查看ID
     
     MoveTo 69,896
     LeftClick 1
-    Delay 1000
+    Delay 2000
     
-    MoveTo 37,247
+    MoveTo 110,241
+    LeftClick 1
+    Delay 2000
+    
+    MoveTo 366,245
     LeftDown 1
     Delay 1000
-    MoveTo 139,248
+    MoveTo 624,245
     LeftUp 1
     Delay 1000
     
@@ -52,5 +69,7 @@ For turn = 1 To 99999999
     data_title = data_acc
     data_content = CStr(Res_checkin)
     data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
+    TracePrint data_post
     res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+    TracePrint res_post
 Next
