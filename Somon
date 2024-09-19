@@ -2,7 +2,7 @@
 //NST setup index:--window-size=1000,1000 --window-position=0,0
 //NST aimed page:https://m.social.monster/task
 //NST working flow only_start:true
-//v1.1
+//v1.2
 
 
 For turn = 1 To 99999999
