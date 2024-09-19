@@ -65,13 +65,22 @@ For turn = 1 To 99999999
     KeyUp "Ctrl", 1
 
     data_acc = Plugin.Sys.GetCLB()
+    TracePrint data_acc
 	
 	
 	//3.发送消息
-    data_title = data_acc
-    data_content = CStr(Res_checkin)
+    data_title = "So"
+    data_content = "(" + CStr(Res_checkin) + ")" + CStr(data_acc)
     data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
     TracePrint data_post
     res_post = Plugin.SmHTTP.HTTP_POST(data_post)
     TracePrint res_post
+    
+    //adition send
+    data_token2 = "439de83c29d143f3a58ca2e856e717d3"
+    data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token2 + "&title=" + data_title + "&content=" + data_content)
+    res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+    
+    Delay 3000
+    
 Next
