@@ -1,9 +1,8 @@
 //Resolution 1920x1080
-//v5.0.0
+//v5.1.0
 
 For turn = 1 To 99999999
 
-    Call Plugin.Sys.SetCLB("none")
     Click_offline = 0
 
     IfColor 606, 25, "FDE3D3", 0 Then
@@ -121,11 +120,22 @@ For turn = 1 To 99999999
             	Else
                 	data_title = data_name + "(" + CStr(Click_offline) + ")"
                 	data_content = data_level + ":" + data_coin
-                	data_token="4cb5f0be7125416ca4a76b76a328684d"
+                	
+                	data_token = "4cb5f0be7125416ca4a76b76a328684d"
                 	data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
                 	TracePrint data_post
                 	res_post = Plugin.SmHTTP.HTTP_POST(data_post)
                 	TracePrint res_post
+                	
+                	
+                	data_token2 = "439de83c29d143f3a58ca2e856e717d3"
+                	data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token2 + "&title=" + data_title + "&content=" + data_content)
+                	TracePrint data_post
+                	res_post = Plugin.SmHTTP.HTTP_POST(data_post)
+                	TracePrint res_post
+                	
+                	Call Plugin.Sys.SetCLB("none")
+                	
             	End If
         	End If
 	
