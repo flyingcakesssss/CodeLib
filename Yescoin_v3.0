@@ -1,5 +1,5 @@
 //Resolution 1920x1080
-//v5.1.0
+//v5.2.0
 
 For turn = 1 To 99999999
 
@@ -52,6 +52,12 @@ For turn = 1 To 99999999
         LeftClick 1
         Delay 2000
     End If
+    
+    
+    //关闭BN任务
+    MoveTo 957,826
+    LeftClick 1
+    Delay 2000
     
     //2.打开My
 	IfColor 768,801, "FFC676", 0 Then //防止每日任务未加载
