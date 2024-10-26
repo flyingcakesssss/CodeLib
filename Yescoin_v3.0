@@ -1,80 +1,86 @@
 //Resolution 1920x1080
-//v5.2.0
+//v6.0
 
 For turn = 1 To 99999999
 
     Click_offline = 0
-
-    IfColor 606, 25, "FDE3D3", 0 Then
-        MoveTo 606, 25
-        LeftClick 1
-        KeyPress "F11", 1
-        Delay 5000
-    End If
-    
-    IfColor 615,22, "E9E3DD", 0 Then
-        MoveTo 615,22
-        LeftClick 1
-        KeyPress "F11", 1
-        Delay 5000
-    End If
+	
+	
+	//0.等待NST界面跳出
+	For turn = 1 To 99999999
+    	IfColor 606, 25, "FDE3D3", 0 Then
+        	MoveTo 606, 25
+        	LeftClick 1
+//        	KeyPress "F11", 1
+        	Delay 5000
+        	Exit For
+    	End If
+    	
+    	IfColor 615,22, "E9E3DD", 0 Then
+        	MoveTo 615,22
+        	LeftClick 1
+//        	KeyPress "F11", 1
+        	Delay 5000
+        	Exit For
+    	End If
+    Next
 
     //1.跳出界面处理
     //①点击离线奖励
 	
-    IfColor 802,564, "FF997E", 0 Then
-        MoveTo 872, 621
+    IfColor 559,717, "17F6FF", 0 Then
+        MoveTo 389,717
         LeftClick 1
         Delay 3000
         Click_offline = Click_offline + 1
     End If
 
-    //②关闭每日任务
+    //②关闭每日任务 2-4
 
-    IfColor 959,374, "FFC374", 0 Then
-        MoveTo 958,815
-        LeftClick 1
-        MoveTo 955,755
+    IfColor 574,477, " E1485F", 0 Then
+        MoveTo 695,471
         LeftClick 1
         Delay 2000
     End If
     
-    IfColor 962,404, "FFC374", 0 Then
-        MoveTo 958,815
-        LeftClick 1
-        MoveTo 961,725
+   IfColor 1030,499, "E1485F", 0 Then
+        MoveTo 699,510
         LeftClick 1
         Delay 2000
     End If
     
-    IfColor 948,298, "FFC374", 0 Then
-        MoveTo 957,826
+    IfColor 570,407, "E1485F", 0 Then
+        MoveTo 703,394
         LeftClick 1
         Delay 2000
     End If
     
     
     //关闭BN任务
-    MoveTo 957,826
+//    MoveTo 699,332
     LeftClick 1
     Delay 2000
     
     //2.打开My
-	IfColor 768,801, "FFC676", 0 Then //防止每日任务未加载
+	IfColor 632,761, "17F6FF", 0 Then //防止每日任务未加载
 		Delay 3000
 		
-    	IfColor 1157,800, "FFC676", 0 Then
-        	MoveTo 1086,796
+		TracePrint "2.打开My-IF1 PASS"
+		
+    	IfColor 641, 837, "E1485F", 0 Then
+    		TracePrint "2.打开My-IF2 PASS"
+        	MoveTo 671,844
         	LeftClick 1
         	Delay 3000
 			
         	
-        	//账户名称
-        	MoveTo 867,293
+        	//账户名称+level
+        	TracePrint "2.打开My-复制1 START"
+        	MoveTo 296,273
         	Delay 1000
         	LeftDown 1
         	Delay 1000
-        	MoveTo 1084,293
+        	MoveTo 517,308
         	LeftUp 1
         	Delay 1000
 	
@@ -84,27 +90,29 @@ For turn = 1 To 99999999
 	
         	data_name = Plugin.Sys.GetCLB()
         	TracePrint data_name
+        	Delay 2000
         	
-        	//Level
-        	MoveTo 865,320
-        	LeftDown 1
-        	Delay 1000
-        	MoveTo 1100,320 
-        	LeftUp 1
-        	Delay 1000
-	
-        	KeyDown "Ctrl", 1
-        	KeyPress "C", 1
-        	KeyUp "Ctrl", 1
-	
-        	data_level = Plugin.Sys.GetCLB()
-        	TracePrint data_level
+//        	//Level
+//        	MoveTo 865,320
+//        	LeftDown 1
+//        	Delay 1000
+//        	MoveTo 1100,320 
+//        	LeftUp 1
+//        	Delay 1000
+//	
+//        	KeyDown "Ctrl", 1
+//        	KeyPress "C", 1
+//        	KeyUp "Ctrl", 1
+//	
+//        	data_level = Plugin.Sys.GetCLB()
+//        	TracePrint data_level
         	
         	//coin数量
-        	MoveTo 901,360
+        	TracePrint "2.打开My-复制2 START"
+        	MoveTo 379,415
         	LeftDown 1
         	Delay 1000
-        	MoveTo 995, 360
+        	MoveTo 618,416
         	LeftUp 1
         	Delay 1000
 	
@@ -120,12 +128,12 @@ For turn = 1 To 99999999
         	//head没写中文支持将就用先，需要填写的内容为：<参数><token> 
         	//不为空才post 减少post量
         	
-        	IfColor 1062,334, "F09B60", 0 Then
+        	IfColor 541,822, "E1485F", 0 Then
             	If data_coin = "none" Then 
                 	Delay 1000
             	Else
-                	data_title = data_name + "(" + CStr(Click_offline) + ")"
-                	data_content = data_level + ":" + data_coin
+                	data_title = Cstr(Click_offline) + data_name
+                	data_content = data_coin
                 	
                 	data_token = "4cb5f0be7125416ca4a76b76a328684d"
                 	data_post = CStr("https://www.pushplus.plus/send/?token=" + data_token + "&title=" + data_title + "&content=" + data_content)
