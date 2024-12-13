@@ -1,5 +1,5 @@
 //Resolution 1920x1080
-//v6.0
+//v6.2
 
 For turn = 1 To 99999999
 
@@ -9,20 +9,19 @@ For turn = 1 To 99999999
 	//0.等待NST界面跳出
 	For turn = 1 To 99999999
     	IfColor 606, 25, "FDE3D3", 0 Then
-        	MoveTo 606, 25
-        	LeftClick 1
-//        	KeyPress "F11", 1
-        	Delay 5000
         	Exit For
     	End If
     	
     	IfColor 615,22, "E9E3DD", 0 Then
         	MoveTo 615,22
         	LeftClick 1
-//        	KeyPress "F11", 1
-        	Delay 5000
+        	TracePrint "Aimed"
+        	Delay 2000
         	Exit For
     	End If
+    	
+    	TracePrint "Waiting"
+    	Delay 2000
     Next
 
     //1.跳出界面处理
@@ -55,6 +54,24 @@ For turn = 1 To 99999999
         Delay 2000
     End If
     
+    IfColor 626,434, "E1485F", 0 Then
+        MoveTo 695,435
+        LeftClick 1
+        Delay 2000
+    End If
+    
+    //③关闭弹窗
+    IfColor 594,842, "17F6FF", 0 Then
+        MoveTo 594,842
+        LeftClick 1
+        Delay 2000
+    End If
+    
+    IfColor 474,364, "0EB3FF", 0 Then
+        MoveTo 287,244
+        LeftClick 1
+        Delay 2000
+    End If
     
     //关闭BN任务
 //    MoveTo 699,332
